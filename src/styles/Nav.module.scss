@@ -1,0 +1,22 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.formstyles {
+	font-size: 17px;
+	float: left;
+	padding: 2px;
+	input {
+		height: 30px;
+		width: 280px;
+		border-radius: 2px;
+		font-size: 15px;
+	}
+	button {
+		height: 30px;
+		border-radius: 2px;
+	}
+}

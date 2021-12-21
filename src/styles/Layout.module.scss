@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Poller+One&display=swap');
+.container {
+	padding: 0 2rem;
+}
+.title {
+	font-family: 'Poller One', cursive;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.button {
+	cursor: pointer;
+	margin: 20px;
+	padding: 5px;
+	border-radius: 2px;
+}
+
+.item {
+	display: flex;
+	margin: 20px;
+	flex-direction: row;
+	justify-content: left;
+}
+.card {
+	font-family: 'Poller One', cursive;
+
+	display: flex;
+	flex-direction: column;
+	margin: 10px;
+	width: 200px;
+	cursor: pointer;
+	padding: 1.5rem;
+	text-align: left;
+	color: #000;
+	text-decoration: none;
+	border: 1px solid #eaeaea;
+	border-radius: 10px;
+	transition: color 0.15s ease, border-color 0.15s ease;
+
+	&:hover,
+	&:focus,
+	&:active {
+		color: #0070f3;
+		border-color: #0070f3;
+	}
+}
+.icon {
+	display: flex;
+	float: left;
+	margin: 30px;
+}
+.inline {
+	display: inline-block;
+	span {
+		padding: 4px;
+	}
+}
+.name {
+	border: 1px solid #eaeaea;
+	border-radius: 10px;
+	margin: 10px;
+	padding: 4px;
+	line-height: 3;
+}
+
+@media (max-width: 600px) {
+	.grid {
+		width: 100%;
+		flex-direction: column;
+	}
+}
