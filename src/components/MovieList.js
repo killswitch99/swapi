@@ -31,7 +31,7 @@ const MovieList = () => {
 	return (
 		<>
 			<div className={styles.container}>
-				<h1>Star Wars Movie</h1>
+				<h1>Star Wars Movies</h1>
 				<Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
 				<div>
 					{filertedMovies

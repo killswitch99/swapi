@@ -2,10 +2,18 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import styles from '../styles/Layout.module.scss'
-import ReactTooltip from 'react-tooltip'
+import Characters from './Characters'
+import Planets from './Planets'
+import Starships from './Starships'
+import Vehicles from './Vehicles'
+import Species from './Species'
+
 const Movie = () => {
 	const { id } = useParams()
-	const [urls, setCharUrls] = useState([]) //urls
+	const [starships, setStarships] = useState([])
+	const [vehicles, setVehicles] = useState([])
+	const [species, setSpecies] = useState([])
+	const [planets, setPlanets] = useState([])
 	const [opening_crawl, setopening_crawl] = useState([])
 	const [director, setdirector] = useState([])
 	const [producer, setproducer] = useState([])
@@ -13,10 +21,10 @@ const Movie = () => {
 	const [title, settitle] = useState([])
 	const [character, setCharacter] = useState([]) //charnames
 	useEffect(() => {
-		fetchMovie()
-		//fetchCharacters()
+		fetchData()
 	}, [])
-	async function fetchMovie() {
+
+	const fetchData = async () => {
 		return await axios
 			.get(`https://www.swapi.tech/api/films/${id}`)
 			.then((res) => res.data)
@@ -26,7 +34,7 @@ const Movie = () => {
 				setdirector(data.result.properties.director)
 				setproducer(data.result.properties.producer)
 				setrelease_date(data.result.properties.release_date)
-				setCharUrls(...urls, data.result.properties.characters)
+
 				data.result.properties.characters.map(
 					async (chars) =>
 						await axios
@@ -36,20 +44,45 @@ const Movie = () => {
 								setCharacter((prevState) => [...prevState, data.result])
 							)
 				)
+				data.result.properties.planets.map(
+					async (chars) =>
+						await axios
+							.get(chars)
+							.then((res) => res.data)
+							.then((data) =>
+								setPlanets((prevState) => [...prevState, data.result])
+							)
+				)
+				data.result.properties.starships.map(
+					async (chars) =>
+						await axios
+							.get(chars)
+							.then((res) => res.data)
+							.then((data) =>
+								setStarships((prevState) => [...prevState, data.result])
+							)
+				)
+				data.result.properties.vehicles.map(
+					async (chars) =>
+						await axios
+							.get(chars)
+							.then((res) => res.data)
+							.then((data) =>
+								setVehicles((prevState) => [...prevState, data.result])
+							)
+				)
+				data.result.properties.species.map(
+					async (chars) =>
+						await axios
+							.get(chars)
+							.then((res) => res.data)
+							.then((data) =>
+								setSpecies((prevState) => [...prevState, data.result])
+							)
+				)
 			})
 			.catch((e) => console.log(e))
 	}
-	// async function fetchCharacters() {
-	// 	return await Promise.all(
-	// 		urls.map(async (url) =>
-	// 			fetch(url)
-	// 				.then((res) => res.data)
-	// 				.then((data) => {
-	// 					setCharacter(...character, data.result.properties.name)
-	// 				})
-	// 		)
-	// 	)
-	// }
 	return (
 		<div className={styles.container}>
 			<Link to="/">
@@ -74,24 +107,11 @@ const Movie = () => {
 					{release_date}
 				</p>
 			</div>
-			<div className={styles.inline}>
-				<strong>Cast: </strong>
-				{character.map((i) => (
-					<span
-						key={i.uid}
-						data-tip={[
-							'Gender' + i.properties.gender,
-							'Height' + i.properties.height,
-							'Skin Color' + i.properties.skin_color,
-							'Eye Color' + i.properties.eye_color,
-						]}
-						className={styles.name}
-					>
-						{i.properties.name}
-						<ReactTooltip />
-					</span>
-				))}
-			</div>
+			<Characters character={character} />
+			<Planets planets={planets} />
+			<Starships starships={starships} />
+			<Vehicles vehicles={vehicles} />
+			<Species species={species} />
 		</div>
 	)
 }

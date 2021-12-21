@@ -1,7 +1,9 @@
 import React, { useRef } from 'react'
 import { IoIosHeart, IoIosHeartEmpty } from 'react-icons/io'
 import useLocalStorage from 'react-use-localstorage'
+import { useAlert } from 'react-alert'
 const Favourite = ({ id }) => {
+	const alert = useAlert()
 	const [storageItem, setStorageItem] = useLocalStorage(
 		'favourites',
 		JSON.stringify([])
@@ -12,9 +14,11 @@ const Favourite = ({ id }) => {
 
 	const handleToggleFavourite = () => {
 		if (!isFavourited) {
+			alert.show('Added to favourite')
 			storagedArray.current.push(id)
 			setStorageItem(JSON.stringify(storagedArray.current))
 		} else {
+			alert.show('Removed from favourite')
 			const indexFavouritedId = storagedArray.current.indexOf(id)
 			storagedArray.current.splice(indexFavouritedId, 1)
 			setStorageItem(JSON.stringify(storagedArray.current))
