@@ -24,4 +24,3 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 • Provide public GitHub repo to source code
 • Use SCSS for styling
 • Use Flexbox or CSS grid for layouts - avoid Bootstrap etc
-• Host the finished project on Vercel or similar
